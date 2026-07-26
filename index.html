@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nirolite - Modern Offline-First Bookkeeping & Inventory</title>
+  <meta name="description" content="Nirolite is an ultra-fast, offline-first bookkeeping and inventory management software for small businesses. Pure double-entry system with point of sale (POS) and customization.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="assets/style.css">
+  
+  <!-- Prevent Flash of Unstyled Content (FOUC) -->
+  <script>
+    {
+      const colorScheme = localStorage.getItem('theme');
+      if (colorScheme) {
+        document.documentElement.setAttribute('data-theme', colorScheme);
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. Navigation Header
+       ========================================================================== -->
+  <header class="header" id="site-header">
+    <div class="container header-container">
+      <div class="logo-wrapper">
+        <img src="Nirolite Logo.jpeg" alt="Nirolite Logo" class="logo-img" onerror="this.src='https://placehold.co/100x38/0097b2/ffffff?text=Nirolite'">
+      </div>
+      
+      <button class="menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="#hero" class="nav-link">Home</a></li>
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#pos-sandbox" class="nav-link">POS Sandbox</a></li>
+        <li><a href="#comparison" class="nav-link">Modern vs Legacy</a></li>
+        <li><a href="help.html" class="nav-link" style="font-weight:600; color:var(--brand-teal);">Manual & Docs</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Color Theme">
+          <!-- Sun Icon -->
+          <svg class="sun-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <!-- Moon Icon -->
+          <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <a href="help.html" class="btn btn-primary">Help Center</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       2. Hero Section & Interactive Dashboard
+       ========================================================================== -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <span class="badge">Offline-First Accounting</span>
+        <h1>Bookkeeping & Inventory <br><span class="gradient-text">that feels like magic.</span></h1>
+        <p>Nirolite is an ultra-fast, local-first double-entry bookkeeping engine with point of sale, batches, serial tracking, and customizable invoice templates. Clean, private, and bloat-free.</p>
+        <div class="hero-cta">
+          <a href="help.html" class="btn btn-primary">Explore User Manual</a>
+          <a href="#pos-sandbox" class="btn btn-secondary">Try Live POS Demo</a>
+        </div>
+      </div>
+
+      <!-- Interactive Dashboard Widget -->
+      <div class="dashboard-preview">
+        <div class="preview-container glass">
+          <div class="preview-header">
+            <div class="preview-title">
+              <div class="window-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <span style="font-size:0.9rem;">Nirolite Live Analytics</span>
+            </div>
+            
+            <div class="period-tabs">
+              <button class="period-tab active" data-period="year">This Year</button>
+              <button class="period-tab" data-period="quarter">This Quarter</button>
+              <button class="period-tab" data-period="month">This Month</button>
+            </div>
+          </div>
+
+          <div class="charts-grid">
+            <!-- Cashflow Card -->
+            <div class="chart-card chart-col-6">
+              <div class="chart-header">
+                <span class="chart-title">Cash Flow</span>
+                <div style="font-size:0.8rem; display:flex; gap:0.75rem;">
+                  <span style="color:#0097b2; font-weight:600;">● Inflow</span>
+                  <span style="color:#ff7a22; font-weight:600;">● Outflow</span>
+                </div>
+              </div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
+                <div>
+                  <div style="font-size:0.75rem; color:var(--text-secondary);">Total Inflow</div>
+                  <div class="chart-value" id="cf-inflow-val">$540,000</div>
+                </div>
+                <div>
+                  <div style="font-size:0.75rem; color:var(--text-secondary);">Total Outflow</div>
+                  <div class="chart-value" style="color:var(--brand-orange);" id="cf-outflow-val">$395,000</div>
+                </div>
+              </div>
+              <div class="chart-body" id="cf-chart-body">
+                <!-- SVG path loaded dynamically in script.js -->
+              </div>
+            </div>
+
+            <!-- Profit Loss Card -->
+            <div class="chart-card chart-col-6">
+              <div class="chart-header">
+                <span class="chart-title">Net Profit & Loss</span>
+                <span style="color:#0097b2; font-weight:600; font-size:0.8rem;">Monthly Earnings</span>
+              </div>
+              <div style="margin-bottom:1rem;">
+                <div style="font-size:0.75rem; color:var(--text-secondary);">Net Profit</div>
+                <div class="chart-value" id="pl-val">$145,000</div>
+              </div>
+              <div class="chart-body" id="pl-chart-body">
+                <!-- SVG bars loaded dynamically in script.js -->
+              </div>
+            </div>
+
+            <!-- Pending Payments Card -->
+            <div class="chart-card chart-col-6">
+              <div class="chart-header">
+                <span class="chart-title">Outstanding Payments & Invoices</span>
+              </div>
+              <div style="display:flex; justify-content:space-around; align-items:center; height:150px;">
+                <div style="text-align:center; display:flex; align-items:center; gap:1rem;">
+                  <div id="pending-sales-donut"></div>
+                  <div style="text-align:left;">
+                    <div style="font-size:0.8rem; color:var(--text-secondary);">Sales Invoices Outstanding</div>
+                    <div class="chart-value" id="pend-sales-val">$24,000</div>
+                  </div>
+                </div>
+                <div style="text-align:center; display:flex; align-items:center; gap:1rem;">
+                  <div id="pending-purch-donut"></div>
+                  <div style="text-align:left;">
+                    <div style="font-size:0.8rem; color:var(--text-secondary);">Purchase Bills Outstanding</div>
+                    <div class="chart-value" style="color:var(--brand-orange);" id="pend-purch-val">$15,000</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Expenses Card -->
+            <div class="chart-card chart-col-6">
+              <div class="chart-header">
+                <span class="chart-title">Top Expenses by Category</span>
+              </div>
+              <div id="top-expenses-list" style="display:flex; flex-direction:column; justify-content:center; height:150px;">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       3. Features Grid Section
+       ========================================================================== -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>Features built for growth.</h2>
+        <p>Nirolite provides core business systems without the complex infrastructure and legacy overhead of standard ERP databases.</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card glass">
+          <div class="feature-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3>Double-Entry Accounting</h3>
+          <p>Chart of Accounts, dynamic journal entries, ledger accounts, and automatic transaction validation. Built on true debits and credits.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card glass">
+          <div class="feature-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <h3>Point of Sale (POS)</h3>
+          <p>Shift-based session management, cash note denomination tracking, instant receipt PDF generation, coupon codes, and loyalty points redemption.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card glass">
+          <div class="feature-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+            </svg>
+          </div>
+          <h3>Traceable Inventory</h3>
+          <p>Control locations (Material Issues, Material Receipts, transfers). Track individual items using Batch Numbers and Unique Serial Numbers.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card glass">
+          <div class="feature-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+          </div>
+          <h3>Data Import Wizard</h3>
+          <p>Import all of your chart of accounts, master items, vendors, and clients easily from any spreadsheet with built-in .csv templates.</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card glass">
+          <div class="feature-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+            </svg>
+          </div>
+          <h3>Forms Customization</h3>
+          <p>Tailor your workflow. Create custom input fields (data, select, link, files) and customize column layout directly in list views.</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card glass">
+          <div class="feature-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h3>Vue Print Templates</h3>
+          <p>Write custom HTML, inline CSS, or Tailwind utility classes to design high-quality invoice, slip, and report PDFs tailored to your branding.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       4. POS Checkout Simulator (Interactive Sandbox)
+       ========================================================================== -->
+  <section class="pos-sim" id="pos-sandbox">
+    <div class="container">
+      <div class="section-header">
+        <h2>POS Checkout Sandbox</h2>
+        <p>Experience the retail cashier interface of Nirolite. Add items, apply discount codes, and simulate checking out in real-time.</p>
+      </div>
+
+      <div class="pos-grid">
+        <!-- Products catalog -->
+        <div class="pos-catalog">
+          <div class="pos-catalog-header">
+            <div class="pos-catalog-title">Product Catalog</div>
+            <div style="font-size:0.8rem; color:var(--text-secondary);">Click cards to add items</div>
+          </div>
+          <div class="pos-products" id="pos-products-grid">
+            <!-- Rendered in script.js -->
+          </div>
+        </div>
+
+        <!-- Cart and Invoice Summary -->
+        <div class="pos-cart">
+          <div class="pos-cart-header">
+            <div class="pos-cart-title">Cashier Ticket Summary</div>
+          </div>
+          
+          <div class="pos-cart-items" id="pos-cart-items-list">
+            <!-- Rendered in script.js -->
+          </div>
+
+          <div class="pos-cart-summary">
+            <div class="pos-summary-row">
+              <span>Subtotal</span>
+              <span id="pos-subtotal">$0.00</span>
+            </div>
+            
+            <div class="pos-summary-row" style="color:var(--brand-orange);">
+              <span>Discounts Applied</span>
+              <span id="pos-discount">-$0.00</span>
+            </div>
+            
+            <div class="pos-summary-row total">
+              <span>Grand Total</span>
+              <span id="pos-grand-total">$0.00</span>
+            </div>
+
+            <!-- Coupon Input Section -->
+            <div class="coupon-section">
+              <input type="text" id="pos-coupon-input" class="coupon-input" placeholder="Try coupon: WELCOME10 or FREESHIP">
+              <button class="btn btn-secondary" id="pos-apply-coupon" style="padding: 0.5rem 1rem; font-size:0.85rem;">Apply</button>
+            </div>
+            <div id="pos-coupon-status" style="font-size:0.75rem; margin-top:0.25rem; font-weight:600; text-align:right;"></div>
+
+            <button class="btn btn-primary" id="pos-pay-btn" style="margin-top:1rem; width:100%;">Pay & Print Invoice</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       5. General Comparison Section (Nirolite vs Legacy ERP)
+       ========================================================================== -->
+  <section class="compare" id="comparison">
+    <div class="container">
+      <div class="section-header">
+        <h2>Built for Speed. <br>How we compare to Legacy ERPs.</h2>
+        <p>See why modern teams choose Nirolite's local-first architecture over complex, traditional enterprise layouts.</p>
+      </div>
+
+      <div class="compare-table-wrapper">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Feature Description</th>
+              <th class="nirolite-col">Nirolite</th>
+              <th>Traditional ERP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Local-First Offline Performance</strong></td>
+              <td class="nirolite-col"><span class="compare-check">✔</span> Yes (Runs offline instantly)</td>
+              <td><span class="compare-cross">✘</span> No (Requires active web connection)</td>
+            </tr>
+            <tr>
+              <td><strong>Invoice Design Engine</strong></td>
+              <td class="nirolite-col"><span class="compare-check">✔</span> Yes (HTML + CSS + Tailwind)</td>
+              <td><span class="compare-cross">✘</span> No (Fixed standard PDF formats)</td>
+            </tr>
+            <tr>
+              <td><strong>Form & Fields Customization</strong></td>
+              <td class="nirolite-col"><span class="compare-check">✔</span> Yes (Drag-and-drop / Custom columns)</td>
+              <td><span class="compare-cross">✘</span> No (Hardcoded database structure)</td>
+            </tr>
+            <tr>
+              <td><strong>User Interface Aesthetics</strong></td>
+              <td class="nirolite-col"><span class="compare-check">✔</span> Premium Glassmorphic / Dark Mode</td>
+              <td><span class="compare-cross">✘</span> Legacy corporate forms</td>
+            </tr>
+            <tr>
+              <td><strong>Traceability Options</strong></td>
+              <td class="nirolite-col"><span class="compare-check">✔</span> Batch & Serial numbers out of the box</td>
+              <td><span class="compare-cross">✘</span> Advanced licensing needed</td>
+            </tr>
+            <tr>
+              <td><strong>Data Export Formats</strong></td>
+              <td class="nirolite-col"><span class="compare-check">✔</span> Clean JSON / CSV</td>
+              <td><span class="compare-cross">✘</span> Locked databases</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       6. Call To Action & Footer
+       ========================================================================== -->
+  <section style="padding: 100px 0; text-align:center; position:relative;">
+    <div class="container">
+      <h2 style="font-size:2.5rem; font-family:var(--font-display); margin-bottom:1rem;">Ready to upgrade your bookkeeping?</h2>
+      <p style="color:var(--text-secondary); max-width: 600px; margin: 0 auto 2.5rem auto;">Read the complete user manual to learn how to configure inventory, register tax schemes, and create coupon codes.</p>
+      <a href="help.html" class="btn btn-primary" style="font-size:1.1rem; padding: 1rem 2.5rem;">Read HTML User Manual</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>nirolite</h3>
+          <p>The modern desktop-first alternative to clunky corporate ERP systems. Fast, beautiful, offline-first.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pos-sandbox">POS Sandbox</a></li>
+            <li><a href="#comparison">Compare Legacy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="help.html">User Manual</a></li>
+            <li><a href="help.html#getting-started">Getting Started</a></li>
+            <li><a href="help.html#pos">Point of Sale Guide</a></li>
+            <li><a href="help.html#inventory-overview">Inventory Guide</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Nirolite. All rights reserved. Competitive comparison valid as of July 2026.</p>
+        <div style="display:flex; gap:1.5rem;">
+          <a href="help.html" style="color:var(--text-secondary);">Help Center</a>
+          <a href="#" style="color:var(--text-secondary);">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>

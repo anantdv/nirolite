@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" class="help-html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nirolite User Manual & Documentation Book</title>
+  <meta name="description" content="Read the official Nirolite User Manual. Explore articles on Chart of Accounts, Point of Sale transactions, tracking inventory, print templates, and customized forms.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="assets/style.css">
+  
+  <!-- Prevent Flash of Unstyled Content (FOUC) -->
+  <script>
+    {
+      const colorScheme = localStorage.getItem('theme');
+      if (colorScheme) {
+        document.documentElement.setAttribute('data-theme', colorScheme);
+      }
+    }
+  </script>
+</head>
+<body class="help-body">
+
+  <!-- ==========================================================================
+       1. Navigation Header (Shared Style)
+       ========================================================================== -->
+  <header class="header help-header" id="site-header">
+    <div class="container header-container">
+      <div class="logo-wrapper">
+        <a href="index.html">
+          <img src="Nirolite Logo.jpeg" alt="Nirolite Logo" class="logo-img" onerror="this.src='https://placehold.co/100x38/0097b2/ffffff?text=Nirolite'">
+        </a>
+      </div>
+      
+      <!-- Drawer menu toggle button for mobile navigation -->
+      <button class="menu-btn" id="mobile-menu-btn" aria-label="Toggle Documentation Sidebar">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="index.html#hero" class="nav-link">Home</a></li>
+        <li><a href="index.html#features" class="nav-link">Features</a></li>
+        <li><a href="index.html#pos-sandbox" class="nav-link">POS Sandbox</a></li>
+        <li><a href="index.html#comparison" class="nav-link">Modern vs Legacy</a></li>
+        <li><a href="help.html" class="nav-link active" style="font-weight:600; color:var(--brand-teal);">Manual & Docs</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Color Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <a href="index.html" class="btn btn-secondary" style="font-size: 0.9rem; padding: 0.5rem 1rem;">Back to Home</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       2. Help Center Documentation Split Layout
+       ========================================================================== -->
+  <div class="help-layout">
+    
+    <!-- Sidebar: Search and Navigation Menu -->
+    <aside class="docs-sidebar">
+      <div class="search-wrapper">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input type="text" id="docs-search-field" class="search-input" placeholder="Search manual topics...">
+      </div>
+      
+      <nav class="docs-nav-menu" id="docs-nav-categories">
+        <!-- Structured category items rendered by script.js from docs_data.js -->
+      </nav>
+    </aside>
+
+    <!-- Reading Content Area -->
+    <main class="docs-content">
+      <article class="docs-article" id="docs-view-article">
+        <!-- Rendered active article HTML by script.js -->
+      </article>
+
+      <!-- Documentation sequential navigation footer -->
+      <footer class="docs-nav-footer" id="docs-nav-footer-area">
+        <!-- Rendered in script.js (Prev/Next buttons) -->
+      </footer>
+    </main>
+  </div>
+
+  <!-- Documentation pre-compiled JSON data load -->
+  <script src="assets/docs_data.js"></script>
+  <!-- Standard logic script load -->
+  <script src="assets/script.js"></script>
+</body>
+</html>

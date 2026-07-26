@@ -1,0 +1,15 @@
+# System files
+.DS_Store
+Thumbs.db
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local environment / IDE
+.vscode/
+.idea/
+.agents/
+.gemini/
